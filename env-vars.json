@@ -1,0 +1,56 @@
+{
+  "dev": {
+    "ENVIRONMENT": "dev",
+    "AUTH0_CLIENT_ID": {
+      "type": "ssm",
+      "value": "/FE/AUTH0_CLIENT_ID"
+    },
+    "AUTH0_AUDIENCE": "https://cc-api.dev.payconstruct.com",
+    "AUTH0_DOMAIN": "dev-client-connect.eu.auth0.com",
+    "AUTH0_REDIRECTION_URL": "https://payments.dev.getorbital.com/verify-authorization",
+    "AUTH0_SCOPE": "openid profile email address phone offline_access enroll read:authenticators remove:authenticators",
+    "AUTH0_REVOKE_TOKEN_API_URL": "https://cc-token.dev.getorbital.com",
+    "LOGOUT_URL": "https://payments.dev.getorbital.com/login",
+    "STORAGE_SECRET_KEY": "orbitalAuthkey",
+    "GRAPHQL_HTTP_URL": "https://pay.dev.getorbital.com/graphql",
+    "GRAPHQL_WEBSOCKET_URL": "wss://pay.dev.getorbital.com/graphql",
+    "REGION": "eu-west-1",
+    "BMS_URL": "https://bms-api.dev.payperform.com"
+  },
+  "tst": {
+    "ENVIRONMENT": "tst",
+    "AUTH0_CLIENT_ID": {
+      "type": "ssm",
+      "value": "/FE/AUTH0_CLIENT_ID"
+    },
+    "AUTH0_AUDIENCE": "https://cc-api.tst.payconstruct.com",
+    "AUTH0_DOMAIN": "tst-client-connect.eu.auth0.com",
+    "AUTH0_REDIRECTION_URL": "https://payments.tst.getorbital.com/verify-authorization",
+    "AUTH0_SCOPE": "openid profile email address phone offline_access enroll read:authenticators remove:authenticators",
+    "AUTH0_REVOKE_TOKEN_API_URL": "https://cc-token.tst.getorbital.com",
+    "LOGOUT_URL": "https://payments.tst.getorbital.com/login",
+    "STORAGE_SECRET_KEY": "orbitalAuthkey",
+    "GRAPHQL_HTTP_URL": "https://pay.tst.getorbital.com/graphql",
+    "GRAPHQL_WEBSOCKET_URL": "wss://pay.tst.getorbital.com/graphql",
+    "REGION": "eu-west-1",
+    "BMS_URL": "https://bms-api.tst.payperform.com"
+  },
+  "prd": {
+    "ENVIRONMENT": "prd",
+    "AUTH0_CLIENT_ID": {
+      "type": "ssm",
+      "value": "/FE/AUTH0_CLIENT_ID"
+    },
+    "AUTH0_AUDIENCE": "https://cc-api.prd.payconstruct.com",
+    "AUTH0_DOMAIN": "auth.getorbital.com",
+    "AUTH0_REDIRECTION_URL": "https://payments.getorbital.com/verify-authorization",
+    "AUTH0_SCOPE": "openid profile email address phone offline_access enroll read:authenticators remove:authenticators",
+    "AUTH0_REVOKE_TOKEN_API_URL": "https://cc-token.getorbital.com",
+    "LOGOUT_URL": "https://payments.getorbital.com/login",
+    "STORAGE_SECRET_KEY": "orbitalAuthkey",
+    "GRAPHQL_HTTP_URL": "https://pay.prd.getorbital.com/graphql",
+    "GRAPHQL_WEBSOCKET_URL": "wss://pay.prd.getorbital.com/graphql",
+    "REGION": "eu-west-1",
+    "BMS_URL": "https://bms-api.prd.payperform.com"
+  }
+}

@@ -1,0 +1,8 @@
+.txn_Ref {
+  display: flex;
+  align-items: center;
+  cursor: "pointer";
+}
+.pay_subHeader {
+  margin: -30px 0px -30px 0;
+}

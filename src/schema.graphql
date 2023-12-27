@@ -1,0 +1,991 @@
+scalar AWSDateTime
+
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+
+type Account {
+  accountHolderAddress: AccountAddress
+  accountHolderName: String
+  accountIdentification: AccountIdentification
+  accountIssuerAddress: AccountAddress
+  accountIssuerName: String
+  accountName: String
+  accountStatus: String
+  availableBalance: String
+  balance: String
+  blockedBalance: String
+  currency: String!
+  currencyType: String
+  id: ID!
+  mainCurrency: String
+  productId: String
+}
+
+type AccountAddress {
+  _id: String
+  buildingName: String
+  buildingNumber: String
+  city: String
+  country: String
+  countryCode: String
+  floor: String
+  postCode: String
+  status: String
+  street: String
+  type: String
+}
+
+type AccountCreateResponse {
+  code: String
+  data: Account
+  message: String
+}
+
+type AccountDetails {
+  accountNumber: String
+  bankCountry: String
+  bankName: String
+  bic: String
+  branchCode: String
+  iban: String
+  intermediaryBank: String
+  nameOnAccount: String
+}
+
+type AccountIdentification {
+  BIC: String
+  IBAN: String
+  accountNumber: String
+  accountRegion: String
+  bankAddress: AccountAddress
+  bankCode: String
+  bankName: String
+  blockchain: String
+  intermediaryBank: String
+}
+
+type AccountUpdateResponse {
+  code: String
+  message: String
+}
+
+type AccountsResponse {
+  accounts: [Account]
+  nextToken: String
+}
+
+type Address {
+  buildingNumber: String
+  city: String
+  country: String
+  stateOrProvince: String
+  street: String
+  zipOrPostalCode: String
+}
+
+type Balance {
+  availableBalance: String
+  balance: String
+  balanceId: String
+  blockUnblock: String
+  blockedBalance: String
+  createdAt: String
+  promiseUnpromise: String
+  promisedBalance: String
+  status: String
+}
+
+type Beneficiary {
+  accountDetails: AccountDetails
+  beneficiaryDetails: BeneficiaryDetails
+  createdAt: String
+  currency: String
+  id: ID!
+  mainCurrency: String
+  status: String
+}
+
+type BeneficiaryDetails {
+  address: Address
+  nameOnAccount: String
+  type: String
+}
+
+type BeneficiaryResult @aws_api_key @aws_oidc {
+  entityId: String
+  id: String
+  userId: String
+}
+
+type CreateInternalTransferPaymentResponse {
+  EventId: String!
+  code: String
+  message: String
+}
+
+type CreatePaymentResponse {
+  PaymentReference: String!
+}
+
+type Creditor {
+  creditorAddress: Residence
+  creditorCountry: String
+  creditorName: String
+}
+
+type CreditorAgent {
+  creditorAgentCountry: String
+  creditorAgentId: String!
+  creditorAgentName: String
+  intermediaryBank: String
+  intermediaryBankCountry: String
+}
+
+type CryptoAPIKey {
+  accountId: String
+  active: Boolean
+  apiKey: String
+  apiKeyId: String
+  createdAt: String
+  id: String
+  isSandbox: Boolean
+  name: String
+  type: CryptoAPIKeyType
+  updatedAt: String
+}
+
+type CryptoAPIKeyRequest {
+  PK: String
+  SK: String
+  accountId: String
+  createdAt: String
+  isSandbox: Boolean
+  name: String
+  nextToken: String
+  requestorId: String
+  status: String
+  type: String
+  updatedAt: String
+}
+
+type CryptoAPIKeyRequestCreatedRealtimeResponse @aws_api_key @aws_oidc {
+  accountId: String
+  approverId: String
+  createdAt: Float
+  id: String
+  isSandbox: Boolean
+  name: String
+  status: String
+  type: String
+  updatedAt: Float
+  userId: String
+}
+
+type CryptoAddress {
+  _id: String
+  id: String
+}
+
+type CryptoBlockChainTransaction {
+  _id: String
+  accountId: String
+  addressId: String
+  amount: String
+  confidence: String
+  createdAt: String
+  currency: String
+  decimals: Int
+  direction: CryptoBlockChainTransactionDirection
+  id: String
+  merchantId: String
+  minedTimestamp: String
+  payment: String
+  paymentId: String
+  product: CryptoProduct
+  provider: CryptoProvider
+  state: String
+  txHash: String
+  updatedAt: String
+  vendorExternalId: String
+  walletId: String
+}
+
+type CryptoFX {
+  _id: String
+  accountId: String
+  details: CryptoFXDetail
+  id: String
+  issuerEntityId: String
+  merchantId: String
+  paymentId: String
+  sourceAmount: String
+  sourceCurrency: String
+  sourceMerchantId: String
+  targetAmount: String
+  targetCurrency: String
+  targetMerchantId: String
+  type: CryptoFxType
+  vendor: String
+}
+
+type CryptoFXDetail {
+  _id: String
+  transactionRequestId: String
+}
+
+type CryptoFee {
+  _id: String
+  accountId: String
+  addressId: String
+  amount: String
+  createdAt: String
+  currency: String
+  fxId: String
+  id: String
+  issuerEntityId: String
+  mainCurrency: String
+  merchantFeeType: String
+  merchantId: String
+  paymentId: String
+  transactionId: String
+  type: String
+  updatedAt: String
+  vendor: String
+}
+
+type CryptoIPAddresses {
+  createdAt: String
+  ip: String
+  ipLabel: String
+}
+
+type CryptoMerchantBalanceTransaction {
+  _id: String
+  accountId: String
+  amount: String
+  balance: String
+  createdAt: String
+  currency: String
+  debitCredit: CryptoDebitCredit
+  issuerEntityId: String
+  mainCurrency: String
+  merchantBalanceTransactionId: String
+  paymentMethod: CryptoPaymentMethod
+  paymeroMerchantId: String
+  status: CryptoBalanceStatus
+  transactionId: String
+  transactionType: CryptoTransactionType
+  updatedAt: String
+}
+
+type CryptoMerchantWithBalance {
+  accountId: String
+  active: Boolean
+  balance: String
+  createdAt: String
+  currency: String
+  id: String
+  isAddressPoolEnabled: Boolean
+  isHidden: Boolean
+  isSettlementAllowed: Boolean
+  issuerEntityId: String
+  mainCurrency: String
+  merchantName: String
+}
+
+type CryptoPayment {
+  _id: String
+  accountId: String
+  address: CryptoAddress
+  addressExternalId: String
+  addressId: String
+  blockchainTransactions: [CryptoBlockChainTransaction]
+  cashierAmount: String
+  cashierCurrency: String
+  createdAt: String
+  currency: String
+  customSettlement: Boolean
+  exchangeTransactions: [CryptoFX]
+  externalId: String
+  feeCoverage: Boolean
+  fees: [CryptoFee]
+  id: String
+  invoiceCreated: String
+  invoiceExpires: String
+  issuerEntityId: String
+  kytAlertLevel: CryptoAlertLevel
+  kytStatus: CryptoKYTStatus
+  mainCurrency: String
+  merchantId: String
+  notifyUrl: String
+  paidAmount: Float
+  paidAmountInCashierCurrency: Float
+  paidAmountInTargetCurrency: Float
+  provider: String
+  rates: [CryptoRate]
+  receivingAddress: String
+  redirectUrl: String
+  sendingAddress: String
+  sourceAmount: String
+  sourceCurrency: String
+  sourceMerchantId: String
+  status: CryptoPaymentStatus
+  subType: CryptoPaymentSubType
+  targetAmount: String
+  targetCurrency: String
+  targetMerchantId: String
+  txHash: String
+  type: CryptoPaymentType
+  updatedAt: String
+  walletId: String
+}
+
+type CryptoPaymentRealtimeResponse @aws_api_key @aws_oidc {
+  accountId: String
+  addressExternalId: String
+  createdAt: String
+  externalId: String
+  id: String
+  kytAlertLevel: String
+  kytStatus: String
+  receivingAddress: String
+  sourceAmount: String
+  sourceCurrency: String
+  status: String
+  subType: String
+  targetAmount: String
+  targetCurrency: String
+  type: String
+}
+
+type CryptoRate {
+  amount: String
+  price: String
+  rate: String
+  ticker: String
+}
+
+type Debtor {
+  debtorAddress: Residence
+  debtorCountry: String
+  debtorName: String
+}
+
+type DebtorAgent {
+  debtorAgentCountry: String
+  debtorAgentId: String!
+  debtorAgentName: String
+}
+
+type Entity {
+  PK: String!
+  accountId: String
+  entityId: String!
+  organisationId: String!
+  registeredCompanyName: String
+  tradingName: String
+  type: EntityType!
+}
+
+type EntityResponse {
+  entity: Entity
+}
+
+type EventBridgeResponse {
+  id: String!
+}
+
+type ExchangePairs {
+  buyCurrency: String!
+  restrictInCp: Boolean!
+}
+
+type ForeignExchange {
+  allInRate: String
+  buyAmount: String
+  foreignExchangeTradeId: String
+  fxProfitAmount: String
+  fxWithdrawalAmount: String
+  sellAmount: String
+  spread: String
+  tradeReference: String
+  vendorRate: String
+}
+
+type GetCryptoMerchantBalanceTransactionDetailsResponse {
+  fee: CryptoFee
+  id: String
+  payment: CryptoPayment
+  receivable: Receivable
+}
+
+type GetCryptoMerchantBalanceTransactionsResponse {
+  merchantBalanceTransactions: [CryptoMerchantBalanceTransaction]
+  nextToken: String
+}
+
+type GetCryptoMerchantBalancesResponse {
+  merchants: [CryptoMerchantWithBalance]
+  nextToken: String
+}
+
+type GetCryptoPaymentsResponse {
+  nextToken: String
+  page: Int
+  payments: [CryptoPayment]
+}
+
+type GetReceivableDetailsResponse {
+  _id: String
+  accountId: String
+  amount: String
+  company: String
+  createdAt: String
+  currency: String
+  description: String
+  id: String
+  link: String
+  mainCurrency: String
+  merchant: CryptoMerchantWithBalance
+  merchantId: String
+  name: String
+  payment: CryptoPayment
+  paymentId: String
+  status: ReceivableStatus
+  updatedAt: String
+}
+
+type GetReceivablesResponse {
+  nextToken: String
+  receivables: [Receivable]
+}
+
+type GetStatementRequestsResponse {
+  nextToken: String
+  statements: [StatementRequest]
+}
+
+type InternalTransferRealtimeResponse @aws_api_key @aws_oidc {
+  amount: Float
+  creditorAccountId: String
+  creditorAccountNumber: String
+  currency: String
+  debtorAccountId: String
+  debtorAccountNumber: String
+  id: String
+  mainCurrency: String
+  status: String
+  type: String
+  userId: String
+}
+
+type Mutation {
+  BeneficiaryCreatedReceived(entityId: String!, id: String!, userId: String!): BeneficiaryResult @aws_api_key
+  BeneficiaryRemovedReceived(entityId: String!, id: String!, userId: String!): BeneficiaryResult @aws_api_key
+  CreateAccount(account: AccountInput): AccountCreateResponse
+  CreateBeneficiary(beneficiary: BeneficiaryInput): MutationResponse
+  CreateCryptoAPIKeyRequest(id: String, isSandbox: Boolean, name: String!, type: String!): EventBridgeResponse
+  CreateCryptoIPAddress(input: CreateCryptoIPAddressInput!): EventBridgeResponse
+  CreateReceivablesRequestCryptoPayments(amount: String!, company: String!, currency: String!, description: String, id: String, mainCurrency: String, merchantId: String!, paymentId: String, status: String): EventBridgeResponse
+  CryptoAPIKeyRequestCreated(accountId: String, approverId: String, createdAt: Float, id: String, isSandbox: Boolean, name: String, status: String, type: String, updatedAt: Float, userId: String): CryptoAPIKeyRequestCreatedRealtimeResponse @aws_api_key
+  CryptoPaymentCreated(accountId: String, addressExternalId: String, createdAt: String, externalId: String, id: String, kytAlertLevel: String, kytStatus: String, receivingAddress: String, sourceAmount: String, sourceCurrency: String, status: String, subType: String, targetAmount: String, targetCurrency: String, type: String): CryptoPaymentRealtimeResponse @aws_api_key
+  CryptoPaymentUpdated(accountId: String, addressExternalId: String, createdAt: String, externalId: String, id: String, kytAlertLevel: String, kytStatus: String, receivingAddress: String, sourceAmount: String, sourceCurrency: String, status: String, subType: String, targetAmount: String, targetCurrency: String, type: String): CryptoPaymentRealtimeResponse @aws_api_key
+  DeleteAccount(account: InputID): AccountUpdateResponse
+  InternalTransferCompleted(amount: Float, creditorAccountId: String, creditorAccountNumber: String, currency: String, debtorAccountId: String, debtorAccountNumber: String, id: String, mainCurrency: String, status: String, type: String, userId: String): InternalTransferRealtimeResponse @aws_api_key
+  InternalTransferCreated(amount: Float, creditorAccountId: String, creditorAccountNumber: String, currency: String, debtorAccountId: String, debtorAccountNumber: String, id: String, mainCurrency: String, status: String, type: String, userId: String): InternalTransferRealtimeResponse @aws_api_key
+  InternalTransferFailed(amount: Float, creditorAccountId: String, creditorAccountNumber: String, currency: String, debtorAccountId: String, debtorAccountNumber: String, id: String, mainCurrency: String, status: String, type: String, userId: String): InternalTransferRealtimeResponse @aws_api_key
+  QuotePriceReceived(accountId: String, allInRate: String, destinationAmount: String, destinationCurrency: String, destinationMainCurrency: String, entityId: String!, errorCode: String, errorMessage: String, fee: String, sourceAmount: String, sourceCurrency: String, sourceMainCurrency: String, userId: String!): Quote @aws_api_key
+  RemoveBeneficiary(beneficiary: InputID): MutationResponse
+  RequestExternalPayment(payment: PaymentRequestInput): CreatePaymentResponse @notImplemented(reason : "will not be implemented for now. Use existing rest endpoint")
+  RequestInternalTransfer(payment: InternalTransferRequestInput): CreateInternalTransferPaymentResponse
+  RequestQuote(quote: QuoteRequestInput): MutationResponse
+  StatementRequestUpdated(createdAt: String, fileName: String, fileType: String, id: String, location: String, requestor: String, requestorAccountId: String, requestorUserId: String, resource: String, status: String, type: String, updatedAt: String): StatementRequestRealtimeResponse @aws_api_key
+  UpdateAccountName(account: AccountNameUpdate): AccountUpdateResponse
+}
+
+type MutationResponse {
+  EventId: String!
+}
+
+type Payment {
+  _id: ID!
+  accountBalanceId: String!
+  accountId: String!
+  balances: [Balance]
+  beneficiaryId: String
+  chargeBearer: String!
+  complianceCheckResult: String
+  created: User
+  createdAt: AWSDateTime!
+  creditAmount: Float
+  creditCurrency: String
+  creditor: Creditor
+  creditorAccount: String
+  creditorAccountType: String!
+  creditorAgent: CreditorAgent
+  debitAmount: Float
+  debitAmountAfterFees: Float
+  debitCurrency: String
+  debtor: Debtor
+  debtorAccount: String
+  debtorAccountType: String!
+  debtorAgent: DebtorAgent
+  endToEndReference: String!
+  errorQueueRemarks: String
+  exitStatusCode: String
+  fees: PaymentFee
+  foreignExchange: ForeignExchange
+  functionState: String
+  instructionCreatedDate: String
+  instructionPriority: String!
+  instructionReceivedDate: AWSDateTime!
+  instructionReference: String!
+  internalPayment: Boolean
+  isDuplicate: Boolean
+  isOutbound: Boolean!
+  isReturn: Boolean
+  isTreasury: Boolean
+  mainCreditCurrency: String
+  mainDebitCurrency: String
+  messageState: String!
+  messageType: String!
+  originalInstructedAmount: Float!
+  ownerEntityId: String!
+  paymentRoutingChannel: String
+  processFlow: String!
+  reference: Reference
+  remittanceInformation: String!
+  requestSource: String
+  requestedValueDate: String!
+  settlementChannel: String
+  status: String
+  transactionReference: String!
+  uetr: String!
+  updated: User
+  updatedAt: AWSDateTime!
+  valueDate: AWSDateTime!
+  vendorAccountId: String
+  vendorBalanceId: String
+}
+
+type PaymentFee {
+  actualLiftingFee: Float!
+  liftingFeeAmount: Float!
+  liftingFeeCurrency: String!
+  liftingFeeMethod: String!
+  pricingProfileId: String!
+}
+
+type Query {
+  AccountsFullTextSearch(productIds: [String], text: String!): [Account]
+  BeneficiaryFullTextSearch(accountNumber: String, country: String, currency: [String], limit: Int, mainCurrency: String, nameOnAccount: String, nextToken: String, status: [String], text: String!): [Beneficiary]
+  CreateStatementRequestCryptoPayments(dateFrom: String!, dateTo: String!, fileName: String, fileType: String, id: String, limit: Int, sort: String, sortBy: String): EventBridgeResponse
+  CreateStatementRequestMerchantBalanceTransactions(dateFrom: String!, dateTo: String!, fileName: String, fileType: String, id: String, limit: Int, merchantId: String!, sort: String, sortBy: String): EventBridgeResponse
+  GetAccountById(id: ID!): Account
+  GetBeneficiaries(accountNumber: String, country: String, currency: [String], limit: Int, mainCurrency: String, nameOnAccount: String, nextToken: String, status: [String]): beneficiaryResponse
+  GetBeneficiaryById(id: ID!): Beneficiary
+  GetClientAccounts(currencies: [String], limit: Int, mainCurrency: String, nextToken: String, productIds: [String]): AccountsResponse
+  GetCryptoApiKeyRequests(isSandbox: Boolean, limit: Int, nextToken: String, type: String): [CryptoAPIKeyRequest]
+  GetCryptoApiKeys(active: Boolean, isSandbox: Boolean, type: String): [CryptoAPIKey]
+  GetCryptoIPAddresses: [CryptoIPAddresses]
+  GetCryptoMerchantBalanceTransactionDetails(id: String): GetCryptoMerchantBalanceTransactionDetailsResponse
+  GetCryptoMerchantBalanceTransactions(dateFrom: String, dateTo: String, limit: Int, nextToken: String, paymeroMerchantId: String, sort: String, transactionType: String): GetCryptoMerchantBalanceTransactionsResponse
+  GetCryptoMerchantBalances(id: String, limit: Int, merchantId: String, nextToken: String, sort: String): GetCryptoMerchantBalancesResponse
+  GetCryptoPayment(id: String!): CryptoPayment
+  GetCryptoPayments(dateFrom: String, dateTo: String, kytAlertLevel: String, limit: Int, nextToken: String, page: Int, searchMinScore: Float, sort: String, sortBy: String, sourceCurrency: String, status: String, subType: String, targetCurrency: String, text: String, type: String): GetCryptoPaymentsResponse
+  GetCurrencyExchangePairs(sellCurrency: String!): [ExchangePairs]
+  GetEntities: [Entity]
+  GetPaymentById(id: String!): Payment
+  GetPayments(accountId: String, conversion: Boolean, currencies: [String], dateFrom: String, dateTo: String, debitCurrencies: [String], limit: Int, nextToken: String, status: String, type: PaymentType): [Payment]
+  GetReceivableDetails(id: String!): GetReceivableDetailsResponse
+  GetReceivables(accountId: String, currency: String, dateFrom: String, dateTo: String, id: String, limit: Int, mainCurrency: String, merchantId: String, nextToken: String, sort: String, sortBy: String, status: String, text: String): GetReceivablesResponse
+  GetStatementRequest(id: String): StatementRequest
+  GetStatementRequests(id: String, limit: Int, nextToken: String, sort: String, status: String): GetStatementRequestsResponse
+  GetStatementRequestsCryptoPayments(id: String, limit: Int, nextToken: String, sort: String, status: String): GetStatementRequestsResponse
+  GetStatementRequestsMerchantBalanceTransactions(id: String, limit: Int, nextToken: String, sort: String, status: String): GetStatementRequestsResponse
+  PaymentsFullTextSearch(conversion: Boolean, currencies: [String], dateFrom: String, dateTo: String, debitCurrencies: [String], limit: Int, nextToken: String, status: String, text: String!, type: PaymentType): [Payment]
+  SignStatementRequest(id: String!): SignStatementRequestResponse
+}
+
+type QueryGetCryptoSortBy {
+  _id: String
+  createdAt: String
+}
+
+type Quote @aws_api_key @aws_oidc {
+  accountId: String
+  allInRate: String
+  destinationAmount: String
+  destinationCurrency: String
+  destinationMainCurrency: String
+  entityId: String
+  errorCode: QuoteErrorCode
+  errorMessage: String
+  fee: String
+  sourceAmount: String
+  sourceCurrency: String
+  sourceMainCurrency: String
+  userId: String
+}
+
+type Receivable {
+  _id: String
+  accountId: String
+  amount: String
+  company: String
+  createdAt: String
+  currency: String
+  description: String
+  id: String
+  link: String
+  mainCurrency: String
+  merchantId: String
+  name: String
+  paymentId: String
+  status: ReceivableStatus
+  updatedAt: String
+}
+
+type Reference {
+  creditorAccountId: String
+  creditorCurrencyType: String
+  debtorCurrencyType: String!
+  externalReference: String
+  settlementVendorId: ID!
+  txHash: String
+}
+
+type Residence {
+  buildingNumber: String
+  city: String
+  country: String
+  postalCode: String
+  state: String
+  street: String
+}
+
+type SignStatementRequestResponse {
+  signed: String!
+}
+
+type StatementRequest {
+  createdAt: String
+  fileName: String
+  fileType: String
+  id: String
+  location: String
+  requestor: String
+  requestorAccountId: String
+  requestorUserId: String
+  resource: String
+  status: String
+  type: String
+  updatedAt: String
+}
+
+type StatementRequestRealtimeResponse @aws_api_key @aws_oidc {
+  createdAt: String
+  fileName: String
+  fileType: String
+  id: String
+  location: String
+  requestor: String
+  requestorAccountId: String
+  requestorUserId: String
+  resource: String
+  status: String
+  type: String
+  updatedAt: String
+}
+
+type Subscription {
+  OnBeneficiaryCreatedReceived: BeneficiaryResult @aws_subscribe(mutations : ["BeneficiaryCreatedReceived"])
+  OnBeneficiaryRemovedReceived: BeneficiaryResult @aws_subscribe(mutations : ["BeneficiaryRemovedReceived"])
+  OnCryptoAPIKeyRequestCreated(id: String): CryptoAPIKeyRequestCreatedRealtimeResponse @aws_subscribe(mutations : ["CryptoAPIKeyRequestCreated"])
+  OnCryptoPaymentCreated(id: String): CryptoPaymentRealtimeResponse @aws_subscribe(mutations : ["CryptoPaymentCreated"])
+  OnCryptoPaymentUpdated(id: String): CryptoPaymentRealtimeResponse @aws_subscribe(mutations : ["CryptoPaymentUpdated"])
+  OnInternalTransferCompleted(id: String): InternalTransferRealtimeResponse @aws_subscribe(mutations : ["InternalTransferCompleted"])
+  OnInternalTransferCreated(id: String): InternalTransferRealtimeResponse @aws_subscribe(mutations : ["InternalTransferCreated"])
+  OnInternalTransferFailed(id: String): InternalTransferRealtimeResponse @aws_subscribe(mutations : ["InternalTransferFailed"])
+  OnQuotePriceReceived: Quote @aws_subscribe(mutations : ["QuotePriceReceived"])
+  OnStatementRequestCryptoPaymentsUpdated(id: String): StatementRequestRealtimeResponse @aws_subscribe(mutations : ["StatementRequestUpdated"])
+  OnStatementRequestMBTUpdated(id: String): StatementRequestRealtimeResponse @aws_subscribe(mutations : ["StatementRequestUpdated"])
+  OnStatementRequestUpdated(id: String): StatementRequestRealtimeResponse @aws_subscribe(mutations : ["StatementRequestUpdated"])
+}
+
+type User {
+  email: String!
+  firstName: String!
+  lastName: String!
+  source: String!
+  userId: String!
+}
+
+type beneficiaryResponse {
+  beneficiaries: [Beneficiary]
+  count: Int
+  nextToken: String
+}
+
+type typeID {
+  id: ID!
+}
+
+enum CryptoAPIKeyType {
+  ALL
+  PAY_IN
+  PAY_OUT
+}
+
+enum CryptoAlertLevel {
+  high
+  low
+  medium
+  severe
+  unknown
+}
+
+enum CryptoBalanceStatus {
+  complete
+}
+
+enum CryptoBlockChainTransactionDirection {
+  incoming
+  outgoing
+}
+
+enum CryptoBlockChainTransactionState {
+  complete
+}
+
+enum CryptoDebitCredit {
+  CREDIT
+  DEBIT
+}
+
+enum CryptoFxType {
+  BALANCE_TRANSFER
+  DEPOSIT
+}
+
+enum CryptoKYTStatus {
+  dismissed
+  flagged
+  in_review
+  no_review
+  refunded
+}
+
+enum CryptoPaymentMethod {
+  CRYPTO
+  CRYPTO_DEPOSIT
+  CRYPTO_PAYMENT
+  CRYPTO_PAYOUT
+  INTERNAL_TRANSFER
+}
+
+enum CryptoPaymentStatus {
+  completed
+  confirmed
+  credited
+  debited
+  expired
+  failed
+  initiated
+  overPaid
+  paid
+  pending
+  refunded
+  underPaid
+}
+
+enum CryptoPaymentSubType {
+  batch
+  channel
+  invoice
+}
+
+enum CryptoPaymentType {
+  deposit
+  payout
+}
+
+enum CryptoProduct {
+  cf
+}
+
+enum CryptoProvider {
+  binancepay
+  copper
+  curv
+  fireblocks
+  tatum
+  trongrid
+}
+
+enum CryptoTransactionType {
+  BLOCK
+  DEPOSIT
+  DEPOSIT_REVERSAL
+  FEE
+  FEE_REFUND
+  INTERNAL_TRANSFER_INBOUND
+  INTERNAL_TRANSFER_OUTBOUND
+  NETWORK_FEE
+  NETWORK_FEE_COVERAGE
+  NETWORK_FEE_REFUND
+  PAYOUT
+  PAYOUT_REFUND
+  SETTLEMENT
+  SETTLEMENT_REFUND
+  TOPUP_EXTERNAL
+  TOPUP_PMID
+  TRANSFER_EXTERNAL
+  TRANSFER_PMID
+  UNBLOCK
+}
+
+enum EntityType {
+  client
+}
+
+enum InternalTransferDomain {
+  crypto
+  pay
+}
+
+enum InternalTransferType {
+  internal_transfer_crypto_pay
+  internal_transfer_pay_crypto
+  outbound_asset_internal_crypto_crypto
+  outbound_asset_internal_crypto_exchange
+  outbound_asset_internal_fiat_fiat
+  outbound_liability_external_crypto_crypto
+  outbound_liability_internal_crypto_crypto
+  outbound_liability_internal_crypto_fiat
+  outbound_liability_internal_fiat_fiat
+}
+
+enum PaymentType {
+  IN
+  OUT
+}
+
+enum QueryGetSort {
+  asc
+  desc
+}
+
+enum QuoteErrorCode {
+  InsufficientFundException
+  InternalServerErrorException
+  NotImplementedException
+  PayloadErrorException
+  PricingNotFoundException
+}
+
+enum ReceivableStatus {
+  created
+  initiated
+  overPaid
+  paid
+  underPaid
+}
+
+input AccountDetailsInput {
+  accountNumber: String
+  bankCountry: String
+  bankName: String
+  bic: String
+  branchCode: String
+  iban: String
+  intermediaryBank: String
+  nameOnAccount: String
+}
+
+input AccountInput {
+  accountName: String!
+  currency: String!
+  currencyId: String!
+  currencyType: String!
+  mainCurrency: String
+  mainCurrencyId: String
+}
+
+input AccountNameUpdate {
+  id: ID!
+  name: String!
+}
+
+input AddressInput {
+  buildingNumber: String
+  city: String
+  country: String
+  stateOrProvince: String
+  street: String
+  zipOrPostalCode: String
+}
+
+input BeneficiaryDetailsInput {
+  address: AddressInput
+  nameOnAccount: String
+  type: String
+}
+
+input BeneficiaryInput {
+  accountDetails: AccountDetailsInput
+  beneficiaryDetails: BeneficiaryDetailsInput
+  currency: String
+  id: ID
+}
+
+input CreateCryptoIPAddressInput {
+  IPs: [CryptoIPAddressInput!]!
+}
+
+input CryptoIPAddressInput {
+  ip: String!
+  ipLabel: String!
+}
+
+input InputID {
+  id: ID!
+}
+
+input InternalTransfer {
+  account: String!
+  amount: Float!
+  currency: String!
+  domain: InternalTransferDomain!
+  mainCurrency: String
+}
+
+input InternalTransferRequestInput {
+  source: InternalTransfer!
+  target: InternalTransfer!
+}
+
+input PaymentRequestInput {
+  accountId: String!
+  beneficiaryId: String
+  creditAmount: String!
+  creditCurrency: String!
+  creditorAccountId: String
+  debitAmount: String!
+  debitCurrency: String!
+  remittanceInformation: String
+}
+
+input QuoteRequestInput {
+  accountId: String!
+  destinationAmount: String
+  destinationCurrency: String!
+  destinationMainCurrency: String
+  source: String
+  sourceAmount: String
+  sourceCurrency: String!
+  sourceMainCurrency: String
+}
